@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yam's Scorekeeper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Yam's Scorekeeper</h1>
+        <div class="buttons">
+            <button onclick="createNewGame()">Nouvelle Partie</button>
+            <button onclick="confirmResetScores()">Réinitialiser les Scores</button>
+            <button onclick="saveGame()">Sauvegarder la Partie</button>
+            <button onclick="loadGames()">Charger une Partie</button>
+            <button onclick="undoAction()">Annuler Dernière Action</button>
+        </div>
+        <div id="gamesList"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="scoreTable">
+                <!-- Catégories classiques -->
+                <tr><td>Un (As)</td><td><input type="number" id="as" onchange="calculateScore()"></td></tr>
+                <tr><td>Deux</td><td><input type="number" id="deux" onchange="calculateScore()"></td></tr>
+                <tr><td>Trois</td><td><input type="number" id="trois" onchange="calculateScore()"></td></tr>
+                <tr><td>Quatre</td><td><input type="number" id="quatre" onchange="calculateScore()"></td></tr>
+                <tr><td>Cinq</td><td><input type="number" id="cinq" onchange="calculateScore()"></td></tr>
+                <tr><td>Six</td><td><input type="number" id="six" onchange="calculateScore()"></td></tr>
+                <!-- Bonus -->
+                <tr><td><strong>Total Section Supérieure</strong></td><td><span id="totalSup"></span></td></tr>
+                <tr><td><strong>Bonus (si ≥ 63)</strong></td><td><span id="bonus">0</span></td></tr>
+                <tr><td><strong>Total avec Bonus</strong></td><td><span id="totalAvecBonus"></span></td></tr>
+                <!-- Combinaisons spéciales -->
+                <tr>
+                    <td>Paire (10 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('paire', 10)">10</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('paire', 0)">0</button>
+                        <span id="paire-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Double Paire (15 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('doublePaire', 15)">15</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('doublePaire', 0)">0</button>
+                        <span id="doublePaire-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Brelan (20 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('brelan', 20)">20</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('brelan', 0)">0</button>
+                        <span id="brelan-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Petite Suite (25 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('petiteSuite', 25)">25</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('petiteSuite', 0)">0</button>
+                        <span id="petiteSuite-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Grande Suite (25 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('grandeSuite', 25)">25</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('grandeSuite', 0)">0</button>
+                        <span id="grandeSuite-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Full (30 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('full', 30)">30</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('full', 0)">0</button>
+                        <span id="full-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Carré (40 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('carre', 40)">40</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('carre', 0)">0</button>
+                        <span id="carre-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Yam's (50 pts)</td>
+                    <td>
+                        <button class="btn-success" onclick="updateSpecialScore('yams', 50)">50</button>
+                        <button class="btn-fail" onclick="updateSpecialScore('yams', 0)">0</button>
+                        <span id="yams-score" class="special-score"></span>
+                    </td>
+                </tr>
+                <tr><td>Chance</td><td><input type="number" id="chance" onchange="calculateScore()"></td></tr>
+                <!-- Total -->
+                <tr><td><strong>Total Section Inférieure</strong></td><td><span id="totalInf"></span></td></tr>
+                <tr><td><strong>Total Général</strong></td><td><span id="totalGeneral"></span></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
